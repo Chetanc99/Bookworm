@@ -1,0 +1,14 @@
+# Local development defaults - active unless SPRING_PROFILES_ACTIVE=prod is set.
+spring:
+  jpa:
+    hibernate:
+      # 'update' locally so new columns/tables added during development
+      # (e.g. AUDIT_LOGS this session) get created automatically without
+      # hand-writing a migration every time. See application-prod.yml for
+      # why this is NOT safe to carry into a real deployment.
+      ddl-auto: update
+    show-sql: true
+
+logging:
+  level:
+    com.bookworm.backend: DEBUG

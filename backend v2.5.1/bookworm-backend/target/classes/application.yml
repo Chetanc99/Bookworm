@@ -1,0 +1,97 @@
+spring:
+  # dev is the default so `mvn spring-boot:run` with no env vars still works
+  profiles:
+    active: dev
+
+  application:
+    name: bookworm-backend
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/bookworm_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
+    username: root
+    password: ugly kitty
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+    open-in-view: false
+
+  web:
+    error:
+      include-message: always
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: greaterpope@gmail.com
+    password: ugly kitty
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+server:
+  port: 8081
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+bookworm:
+  jwt:
+    secret: bookworm-dev-only-secret-key-change-me-please-32bytes+
+    expiration-ms: 86400000
+
+  expiry-cleanup:
+    fixed-delay-ms: 900000
+
+  upload:
+    dir: uploads
+
+  password-reset:
+    expiration-minutes: 30
+
+  mail:
+    enabled: true
+    from: greaterpope@gmail.com
+
+  notification-service:
+    # Set to true ONLY if the notification microservice is running
+    enabled: false
+    base-url: http://localhost:8082
+
+  frontend:
+    reset-password-url: http://localhost:5173/reset-password
+    verify-email-url: http://localhost:5173/verify-email
+
+  email-verification:
+    expiration-minutes: 1440
+
+  rate-limit:
+    login-max-per-minute: 100
+    default-max-per-minute: 500
+
+  otp:
+    enabled: false
+    expiration-minutes: 5

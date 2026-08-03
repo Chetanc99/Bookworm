@@ -1,0 +1,25 @@
+# Real-deployment overrides. Activate with SPRING_PROFILES_ACTIVE=prod.
+#
+# IMPORTANT: every env var referenced below with no default (no ${VAR:default}
+# fallback) MUST be set explicitly in prod - JWT_SECRET and DB_PASSWORD in
+# particular must never fall back to the dev placeholders in application.yml.
+spring:
+  jpa:
+    hibernate:
+      # 'update' - entity changes (new tables/columns/FKs) are applied to the
+      # production schema automatically on startup, same as dev. Hibernate's
+      # update mode only ever adds - it does not drop or rename columns/tables,
+      # so existing data is preserved; it will not remove a column/table that
+      # was deleted from an entity, so cleanup of those still needs a manual
+      # step if that's ever required.
+      ddl-auto: update
+    show-sql: false
+
+logging:
+  level:
+    root: WARN
+    com.bookworm.backend: INFO
+    org.hibernate: WARN
+
+# Full actuator health details are gated to authorized (ADMIN) requests only
+# even in prod - see application.yml's show-details: when-authorized.
