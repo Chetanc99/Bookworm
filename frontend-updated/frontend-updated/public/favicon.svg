@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E5C079"/>
+      <stop offset="1" stop-color="#C5A059"/>
+    </linearGradient>
+    <filter id="dropShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dy="2" dx="0"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <path d="M32 14C18 14 8 20 4 24V54C8 50 18 46 32 46C46 46 56 50 60 54V24C56 20 46 14 32 14Z" fill="url(#goldGrad)" filter="url(#dropShadow)"/>
+  <path d="M32 14V46" stroke="white" stroke-width="3" stroke-linecap="round"/>
+</svg>

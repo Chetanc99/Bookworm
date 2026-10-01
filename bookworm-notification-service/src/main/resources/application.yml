@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: bookworm-notification-service
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: user@gmail.com
+    password: password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+
+# Separate port from bookworm-backend
+server:
+  port: 8082
+
+notification:
+  mail:
+    enabled: true
+    from: user@gmail.com
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
